@@ -8,7 +8,7 @@ public class ExtremeKartlar : MonoBehaviour
     public Button kartButton;
 
     private List<string> kartTurleri = new List<string> { "Tür1", "Tür2", "Tür3", "Tür4", "Tür5", "Tür6",  };
-    private List<int> kartSayilari = new List<int> { 2, 2, 2, 2, 2, 18 };
+    private List<int> kartSayilari = new List<int> { 2, 2, 2, 2, 2, 19 };
 
     private List<GameObject> karisikKartlar = new List<GameObject>(); // Karýþýk kart listesi
     private int siradakiKartIndex = 0;
@@ -54,7 +54,7 @@ public class ExtremeKartlar : MonoBehaviour
     
     public void KartiGoster()
     {
-        Counter.text = (26-(siradakiKartIndex)).ToString();
+        Counter.text = ((karisikKartlar.Count)-(siradakiKartIndex)-1).ToString();
         karisikKartlar[siradakiKartIndex].SetActive(false);
         siradakiKartIndex++; // Siradaki kart index'ini arttir
         if (siradakiKartIndex < karisikKartlar.Count)
