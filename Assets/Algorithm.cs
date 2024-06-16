@@ -9,73 +9,69 @@ public class Algorithm : MonoBehaviour
     private string[] veriDizisi;
     private List<string> grup1 = new List<string>();
     private List<string> grup2 = new List<string>();
-    Button a;
-    int random;
     public GameObject panel;
-   public Text text;
-   
-    
-    
-    public void VerileriAyir(string girilenVeri)
+    public Text text;
+    public Text Zar_text;
+    public GameObject PlaceHolder;
+
+    public void VerileriAyir()
     {
-        girilenVeri = inputField.text;
+        string girilenVeri = inputField.text;
         grup1.Clear();
         grup2.Clear();
+
         // Verileri virgülle ayýrarak diziye atama yap
         veriDizisi = girilenVeri.Split(',');
 
-        Random();
-        PrintScreen();
-        // Gruplarý ekrana yazdýrma (opsiyonel)
-        Debug.Log("Grup 1: " + string.Join(", ", grup1.ToArray()));
-        Debug.Log("Grup 2: " + string.Join(", ", grup2.ToArray()));
-    }
- 
-    void Random()
-    {
-         random = veriDizisi.Length ;
-        float random1;
-         random1 = float.Parse(random.ToString());
-        for (int i=0; i < random; i++)
+        // Verileri random olarak iki gruba ayýrma
+        for (int i = 0; i < veriDizisi.Length; i++)
         {
-            int karar = UnityEngine.Random.Range(1,3);
-            if (karar == 1& grup1.Count < random1 / 2)
+            // Rastgele bir gruba ekle
+            int rastgeleGrup = UnityEngine.Random.Range(0, 2); 
+            if (rastgeleGrup == 0)
             {
                 grup1.Add(veriDizisi[i]);
             }
-            else if( grup2.Count<random1/2)
+            else
             {
                 grup2.Add(veriDizisi[i]);
             }
         }
 
-       
-        
-       
+        // Sonuçlarý ekrana yazdýrma
+        PrintScreen();
     }
+
+    public void ZarAt()
+    {
+        int zar1 = UnityEngine.Random.Range(1, 7);
+        int zar2 = UnityEngine.Random.Range(1, 7);
+        Debug.Log(zar1 + " , " + zar2);
+        PrintScreenZar(zar1, zar2);
+    }
+
+    void PrintScreenZar(int zar1, int zar2)
+    {
+        PlaceHolder.SetActive(false);
+        Zar_text.text = zar1 + " , " + zar2;
+    }
+
     void PrintScreen()
     {
         panel.SetActive(true);
 
-        
         text.text = "Birinci grup \n";
-
-        
         for (int i = 0; i < grup1.Count; i++)
         {
             text.text += grup1[i] + " ";
         }
 
-       
-        text.text += "\nikinci grup \n";
-
-       
+        text.text += "\nIkinci grup \n";
         for (int i = 0; i < grup2.Count; i++)
         {
             text.text += grup2[i] + " ";
         }
     }
-
 
     public void OnclickButton()
     {
