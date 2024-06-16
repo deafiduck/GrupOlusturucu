@@ -26,22 +26,33 @@ public class Algorithm : MonoBehaviour
         // Verileri random olarak iki gruba ayýrma
         for (int i = 0; i < veriDizisi.Length; i++)
         {
-            // Rastgele bir gruba ekle
-            int rastgeleGrup = UnityEngine.Random.Range(0, 2); 
-            if (rastgeleGrup == 0)
+            // Rastgele bir gruba ekle, ancak grup boyutlarý arasýndaki farký göz önünde bulundur
+            if (grup1.Count < grup2.Count)
             {
                 grup1.Add(veriDizisi[i]);
             }
-            else
+            else if (grup2.Count < grup1.Count)
             {
                 grup2.Add(veriDizisi[i]);
+            }
+            else
+            {
+                // Eðer grup boyutlarý eþitse, rastgele bir gruba ekle
+                int rastgeleGrup = UnityEngine.Random.Range(0, 2);
+                if (rastgeleGrup == 0)
+                {
+                    grup1.Add(veriDizisi[i]);
+                }
+                else
+                {
+                    grup2.Add(veriDizisi[i]);
+                }
             }
         }
 
         // Sonuçlarý ekrana yazdýrma
         PrintScreen();
     }
-
     public void ZarAt()
     {
         int zar1 = UnityEngine.Random.Range(1, 7);
