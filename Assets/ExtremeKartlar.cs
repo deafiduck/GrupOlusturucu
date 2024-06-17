@@ -7,8 +7,8 @@ public class ExtremeKartlar : MonoBehaviour
     public GameObject[] kartUIListesi; // Her kart türü için UI öðelerini tutan dizi
     public Button kartButton;
 
-    private List<string> kartTurleri = new List<string> { "Tür1", "Tür2", "Tür3", "Tür4", "Tür5", "Tür6",  };
-    private List<int> kartSayilari = new List<int> { 2, 2, 2, 2, 2, 19 };
+    private List<string> kartTurleri = new List<string> { "Tür1", "Tür2", "Tür3", "Tür4", "Tür5", "Tür6"  };
+    private List<int> kartSayilari = new List<int> { 2, 2, 2, 2, 2, 21 };
 
     private List<GameObject> karisikKartlar = new List<GameObject>(); // Karýþýk kart listesi
     private int siradakiKartIndex = 0;
@@ -54,22 +54,32 @@ public class ExtremeKartlar : MonoBehaviour
     
     public void KartiGoster()
     {
-        Counter.text = ((karisikKartlar.Count)-(siradakiKartIndex)-1).ToString();
-        karisikKartlar[siradakiKartIndex].SetActive(false);
-        siradakiKartIndex++; // Siradaki kart index'ini arttir
-        if (siradakiKartIndex < karisikKartlar.Count)
+        if (((karisikKartlar.Count) - (siradakiKartIndex) - 1)>0)
         {
-            // Kartý ilgili UI'da göster
-            karisikKartlar[siradakiKartIndex].SetActive(true);
-
-           
-           
-
-            // Eger son kartsa, butonu devre disi birak
-            if (siradakiKartIndex >= karisikKartlar.Count)
+            Counter.text = ((karisikKartlar.Count) - (siradakiKartIndex) - 2).ToString();
+            karisikKartlar[siradakiKartIndex].SetActive(false);
+            siradakiKartIndex++; // Siradaki kart index'ini arttir
+            if (siradakiKartIndex < karisikKartlar.Count)
             {
-                kartButton.interactable = false; // Butonu devre disi birak
+                // Kartý ilgili UI'da göster
+                karisikKartlar[siradakiKartIndex].SetActive(true);
+
+
+
+
+                // Eger son kartsa, butonu devre disi birak
+                if (siradakiKartIndex >= karisikKartlar.Count)
+                {
+                    kartButton.interactable = false; // Butonu devre disi birak
+                }
             }
         }
+        else
+        {
+            Counter.text = 0.ToString();
+            karisikKartlar[siradakiKartIndex].SetActive(false);
+            kartButton.interactable = false; // Butonu devre disi birak
+        }
+        
     }
 }
